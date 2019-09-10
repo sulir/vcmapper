@@ -1,4 +1,4 @@
-package com.github.sulir.vcdemo.mapper;
+package com.github.sulir.vcdemo.mapper.annotations;
 
 import java.util.Map;
 

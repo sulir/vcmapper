@@ -1,6 +1,6 @@
 package com.github.sulir.vcdemo.sample;
 
-import com.github.sulir.vcdemo.mapper.StringMapper;
+import com.github.sulir.vcdemo.mapper.annotations.StringMapper;
 
 import java.util.Map;
 

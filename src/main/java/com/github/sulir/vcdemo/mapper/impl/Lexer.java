@@ -1,7 +1,6 @@
-package com.github.sulir.vcdemo.mapper;
+package com.github.sulir.vcdemo.mapper.impl;
 
 import opennlp.tools.stemmer.PorterStemmer;
-import opennlp.tools.stemmer.Stemmer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

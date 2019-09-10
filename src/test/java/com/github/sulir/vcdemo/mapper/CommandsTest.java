@@ -1,5 +1,6 @@
 package com.github.sulir.vcdemo.mapper;
 
+import com.github.sulir.vcdemo.mapper.impl.CommandExecutor;
 import com.github.sulir.vcdemo.sample.*;
 import org.junit.Ignore;
 import org.junit.Test;

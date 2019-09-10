@@ -1,4 +1,4 @@
-package com.github.sulir.vcdemo.mapper;
+package com.github.sulir.vcdemo.mapper.impl;
 
 public class CommandExecutor {
     private CommandIndex index = new CommandIndex();

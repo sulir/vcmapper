@@ -1,4 +1,6 @@
-package com.github.sulir.vcdemo.mapper;
+package com.github.sulir.vcdemo.mapper.impl;
+
+import com.github.sulir.vcdemo.mapper.annotations.VoiceControllable;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

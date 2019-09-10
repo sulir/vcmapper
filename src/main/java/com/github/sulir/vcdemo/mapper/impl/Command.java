@@ -1,4 +1,4 @@
-package com.github.sulir.vcdemo.mapper;
+package com.github.sulir.vcdemo.mapper.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
