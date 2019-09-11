@@ -23,18 +23,18 @@ public class CommandIndex {
     public void addMethod(Method method, Object object) {
         Command command = new Command(object, method);
 
-        List<String> methodWords = Lexer.getInstance().tokenize(method.getName());
-        command.addWords(methodWords);
+        List<Term> methodTerms = Lexer.getInstance().tokenize(method.getName());
+        command.addTerms(methodTerms);
 
         for (Parameter parameter : method.getParameters()) {
             // we need to run javac with the "-parameters" argument to preserve argument names
-            command.addWords(Lexer.getInstance().tokenize(parameter.getName()));
+            command.addTerms(Lexer.getInstance().tokenize(parameter.getName()));
         }
 
         String className = object.getClass().getSimpleName();
         String domainClassName = className.split("\\$")[0].split("Service$")[0];
-        List<String> classWords = Lexer.getInstance().tokenize(domainClassName);
-        command.addWords(classWords);
+        List<Term> classWords = Lexer.getInstance().tokenize(domainClassName);
+        command.addTerms(classWords);
 
         commands.add(command);
     }

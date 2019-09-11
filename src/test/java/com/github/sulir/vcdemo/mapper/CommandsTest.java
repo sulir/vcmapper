@@ -1,5 +1,7 @@
 package com.github.sulir.vcdemo.mapper;
 
+import com.github.sulir.vcdemo.mapper.exceptions.AmbiguityException;
+import com.github.sulir.vcdemo.mapper.exceptions.NoMatchException;
 import com.github.sulir.vcdemo.mapper.impl.CommandExecutor;
 import com.github.sulir.vcdemo.sample.*;
 import org.junit.Ignore;
@@ -7,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -36,16 +39,20 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
-    public void permutations() {
+    public void permutation() {
         execute("turn light on");
         verify(lightService).turnOn();
     }
 
     @Test
-    @Ignore
     public void omittedWord() {
         execute("light on");
+        verify(lightService).turnOn();
+    }
+
+    @Test
+    public void extraWord() {
+        execute("please turn the light on");
         verify(lightService).turnOn();
     }
 
@@ -92,6 +99,12 @@ public class CommandsTest {
     }
 
     private void execute(String command) {
-        executor.execute(command);
+        try {
+            executor.execute(command);
+        } catch (NoMatchException e) {
+            fail("no matching command found");
+        } catch (AmbiguityException e) {
+            fail("ambiguity: " + e.getMatchingCommands());
+        }
     }
 }
