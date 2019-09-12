@@ -1,8 +1,9 @@
-package com.github.sulir.vcdemo.mapper.annotations;
+package com.github.sulir.vcdemo.mapper.api;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface VoiceControllable {
+public @interface Synonyms {
+    Synonym[] value();
 }

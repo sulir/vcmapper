@@ -2,7 +2,7 @@ package com.github.sulir.vcdemo.mapper;
 
 import com.github.sulir.vcdemo.mapper.exceptions.AmbiguityException;
 import com.github.sulir.vcdemo.mapper.exceptions.NoMatchException;
-import com.github.sulir.vcdemo.mapper.impl.CommandExecutor;
+import com.github.sulir.vcdemo.mapper.api.CommandExecutor;
 import com.github.sulir.vcdemo.sample.*;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class CommandsTest {
     private LightService lightService = mock(LightService.class);
     private MonitorService monitorService = mock(MonitorService.class);
     private SpeechService speechService = mock(SpeechService.class);
-    private CommandExecutor executor = new CommandExecutor(new Object[] {lightService, monitorService, speechService});
+    private CommandExecutor executor = new CommandExecutor(lightService, monitorService, speechService);
 
     @Test
     public void simpleMethodCall() {

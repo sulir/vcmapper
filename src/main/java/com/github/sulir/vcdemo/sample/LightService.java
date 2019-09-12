@@ -1,8 +1,8 @@
 package com.github.sulir.vcdemo.sample;
 
-import com.github.sulir.vcdemo.mapper.annotations.Synonym;
-import com.github.sulir.vcdemo.mapper.annotations.VoiceControllable;
-import com.github.sulir.vcdemo.mapper.annotations.StringMapping;
+import com.github.sulir.vcdemo.mapper.api.Synonym;
+import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
+import com.github.sulir.vcdemo.mapper.api.StringMapping;
 
 @VoiceControllable
 @Synonym(of = "start", is = "run")

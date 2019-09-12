@@ -1,7 +1,7 @@
 package com.github.sulir.vcdemo.sample;
 
-import com.github.sulir.vcdemo.mapper.annotations.OptionalWord;
-import com.github.sulir.vcdemo.mapper.annotations.VoiceControllable;
+import com.github.sulir.vcdemo.mapper.api.OptionalWord;
+import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
 
 @VoiceControllable
 public class MonitorService {

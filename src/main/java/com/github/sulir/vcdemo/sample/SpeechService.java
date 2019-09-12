@@ -1,7 +1,7 @@
 package com.github.sulir.vcdemo.sample;
 
-import com.github.sulir.vcdemo.mapper.annotations.VoiceCommand;
-import com.github.sulir.vcdemo.mapper.annotations.VoiceControllable;
+import com.github.sulir.vcdemo.mapper.api.VoiceCommand;
+import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
 
 public class SpeechService {
     // 19. completely other command than class/method names, hard-coded form (high priority)
