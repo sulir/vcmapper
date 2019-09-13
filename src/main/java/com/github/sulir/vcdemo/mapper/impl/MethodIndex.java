@@ -1,6 +1,7 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
 import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
+import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterTypeException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -20,9 +21,13 @@ public class MethodIndex {
     }
 
     public void addMethod(Method method, Object object) {
-        ControlledMethod controlledMethod = new ControlledMethod(object, method);
-        controlledMethod.buildIndex();
-        methods.add(controlledMethod);
+        try {
+            ControlledMethod controlledMethod = new ControlledMethod(object, method);
+            controlledMethod.buildIndex();
+            methods.add(controlledMethod);
+        } catch (UnsupportedParameterTypeException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public List<ControlledMethod> getMethods() {

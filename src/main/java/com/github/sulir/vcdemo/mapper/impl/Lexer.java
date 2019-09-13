@@ -29,6 +29,7 @@ public class Lexer {
     private List<String> split(String string) {
         String[] splitIdentifiers = StringUtils.splitByCharacterTypeCamelCase(string);
         String joinedLower = String.join(" ", splitIdentifiers).toLowerCase();
-        return new ArrayList<>(Arrays.asList(joinedLower.split("\\W+")));
+        String underscoreToSpace = joinedLower.replace('_', ' ');
+        return new ArrayList<>(Arrays.asList(underscoreToSpace.split("\\W+")));
     }
 }

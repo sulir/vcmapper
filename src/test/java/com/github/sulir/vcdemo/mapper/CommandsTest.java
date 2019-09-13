@@ -69,14 +69,12 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
     public void emumParameter() {
         execute("turn on left light");
         verify(lightService).turnOn(Position.LEFT);
     }
 
     @Test
-    @Ignore
     public void twoParameters() {
         execute("set light 1 to red color");
         verify(lightService).setColor(1, ColorEnum.RED);

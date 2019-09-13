@@ -1,5 +1,7 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
+import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterTypeException;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
@@ -15,7 +17,7 @@ public class ControlledMethod {
         this.method = method;
     }
 
-    public void buildIndex() {
+    public void buildIndex() throws UnsupportedParameterTypeException {
         List<String> methodWords = Lexer.getInstance().tokenize(method.getName());
         words.addAll(methodWords);
 
@@ -39,7 +41,7 @@ public class ControlledMethod {
             boolean matchFound = false;
 
             while (iterator.hasNext()) {
-                Object match = parameter.match(iterator.next());
+                Object match = parameter.tryConversion(iterator.next());
 
                 if (match != null) {
                     iterator.remove();
