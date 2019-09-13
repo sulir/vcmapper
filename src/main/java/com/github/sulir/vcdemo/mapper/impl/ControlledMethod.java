@@ -20,8 +20,7 @@ public class ControlledMethod {
         words.addAll(methodWords);
 
         for (Parameter parameter : method.getParameters()) {
-            // we need to run javac with the "-parameters" argument to preserve argument names
-            words.addAll(Lexer.getInstance().tokenize(parameter.getName()));
+            // we need to run javac with the "-parameters" argument to preserve parameter names
             parameters.add(new MethodParameter(parameter.getType()));
         }
 

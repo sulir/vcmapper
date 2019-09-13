@@ -63,7 +63,6 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
     public void unnamedNumericParameter() {
         execute("turn on light 1");
         verify(lightService).turnOn(1);
