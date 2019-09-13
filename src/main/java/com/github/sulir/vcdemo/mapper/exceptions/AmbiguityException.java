@@ -5,14 +5,14 @@ import com.github.sulir.vcdemo.mapper.impl.Command;
 import java.util.List;
 
 public class AmbiguityException extends Exception {
-    private List<Command> matchingCommands;
+    private List<Command> matchingMethods;
 
-    public AmbiguityException(List<Command> matchingCommands) {
-        super(matchingCommands.toString());
-        this.matchingCommands = matchingCommands;
+    public AmbiguityException(List<Command> matchingMethods) {
+        super(matchingMethods.toString());
+        this.matchingMethods = matchingMethods;
     }
 
-    public List<Command> getMatchingCommands() {
-        return matchingCommands;
+    public List<Command> getMatchingMethods() {
+        return matchingMethods;
     }
 }

@@ -57,7 +57,6 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
     public void namedNumericParameter() {
         execute("turn on light number 1");
         verify(lightService).turnOn(1);
@@ -104,7 +103,7 @@ public class CommandsTest {
         } catch (NoMatchException e) {
             fail("no matching command found");
         } catch (AmbiguityException e) {
-            fail("ambiguity: " + e.getMatchingCommands());
+            fail("ambiguity: " + e.getMatchingMethods());
         }
     }
 }

@@ -20,10 +20,10 @@ public class Lexer {
         return instance;
     }
 
-    public List<Term> tokenize(String string) {
+    public List<String> tokenize(String string) {
         List<String> words = split(string);
         words.removeAll(stopWords);
-        return words.stream().map(stemmer::stem).map(Term::new).collect(Collectors.toList());
+        return words.stream().map(stemmer::stem).collect(Collectors.toList());
     }
 
     private List<String> split(String string) {

@@ -6,33 +6,37 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Command {
     private Object object;
     private Method method;
-    private List<Term> terms = new ArrayList<>();
+    private List<String> methodWords;
+    private List<String> sentenceWords;
+    private List<Object> parameterValues = new ArrayList<>();
 
-    public Command(Object object, Method method) {
+    public Command(Object object, Method method, List<String> methodWords) {
         this.object = object;
         this.method = method;
+        this.methodWords = methodWords;
     }
 
-    public void addTerms(List<Term> terms) {
-        this.terms.addAll(terms);
+    public void setSentenceWords(List<String> sentenceWords) {
+        this.sentenceWords = sentenceWords;
     }
 
-    public double calculateScore(String sentence) {
-        List<Term> sentenceTerms = Lexer.getInstance().tokenize(sentence);
+    public void addParameterValue(Object value) {
+        parameterValues.add(value);
+    }
 
-        Set<Term> commandSet = new HashSet<>(terms);
-        Set<Term> sentenceSet = new HashSet<>(sentenceTerms);
-        return SetUtils.jaccardIndex(commandSet, sentenceSet);
+    public double calculateScore() {
+        Set<String> methodSet = new HashSet<>(methodWords);
+        Set<String> sentenceSet = new HashSet<>(sentenceWords);
+        return SetUtils.jaccardIndex(methodSet, sentenceSet);
     }
 
     public void execute() {
         try {
-            method.invoke(object);
+            method.invoke(object, parameterValues.toArray());
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -40,6 +44,6 @@ public class Command {
 
     @Override
     public String toString() {
-        return terms.stream().map(Term::toString).collect(Collectors.joining(" "));
+        return method.toString();
     }
 }
