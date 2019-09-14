@@ -81,10 +81,9 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
     public void mappingClass() {
-        execute("set light 2 to green color");
-        verify(lightService).setColor(2, new Color(0, 255, 0));
+        execute("set light 2 to yellow color");
+        verify(lightService).setColor(2, new Color(255, 255, 0));
     }
 
     @Test

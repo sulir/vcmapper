@@ -1,6 +1,8 @@
 package com.github.sulir.vcdemo.mapper.parameters;
 
+import java.lang.reflect.Parameter;
+
 public interface ParameterConverter {
-    boolean isForType(Class type);
-    Object tryConversion(String term, Class type);
+    boolean isForParameter(Parameter parameter);
+    Object tryConversion(String term, Parameter parameter);
 }

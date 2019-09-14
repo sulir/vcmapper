@@ -1,6 +1,6 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
-import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterTypeException;
+import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -17,13 +17,13 @@ public class ControlledMethod {
         this.method = method;
     }
 
-    public void buildIndex() throws UnsupportedParameterTypeException {
+    public void buildIndex() throws UnsupportedParameterException {
         List<String> methodWords = Lexer.getInstance().tokenize(method.getName());
         words.addAll(methodWords);
 
         for (Parameter parameter : method.getParameters()) {
             // we need to run javac with the "-parameters" argument to preserve parameter names
-            parameters.add(new MethodParameter(parameter.getType()));
+            parameters.add(new MethodParameter(parameter));
         }
 
         String className = object.getClass().getSimpleName();

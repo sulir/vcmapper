@@ -1,13 +1,15 @@
 package com.github.sulir.vcdemo.mapper.parameters;
 
+import java.lang.reflect.Parameter;
+
 public class NumberConverter implements ParameterConverter {
     @Override
-    public boolean isForType(Class type) {
-        return type == int.class;
+    public boolean isForParameter(Parameter parameter) {
+        return parameter.getType() == int.class;
     }
 
     @Override
-    public Object tryConversion(String term, Class type) {
+    public Object tryConversion(String term, Parameter parameter) {
         try {
             return Integer.valueOf(term);
         } catch (NumberFormatException e) {
