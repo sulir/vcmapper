@@ -59,7 +59,7 @@ public class LightService {
     }
 
     // 13. parameters can have synonyms, too: "dim lamp 11"
-    public void dim(@Synonym(of = "light", is = {"lamp", "number"}) int light) {
+    public void dim(@Synonym(of = "light", is = "number") int light) {
 
     }
 }

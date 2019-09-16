@@ -8,5 +8,5 @@ import java.lang.annotation.RetentionPolicy;
 @Repeatable(Synonyms.class)
 public @interface Synonym {
     String of();
-    String[] is();
+    String is();
 }

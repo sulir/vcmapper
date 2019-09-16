@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandExecutor {
-    private static final double SCORE_THRESHOLD = 0.1;
+    private static final double SCORE_THRESHOLD = 0.2;
     private MethodIndex index = new MethodIndex();
 
     public CommandExecutor(Object... objects) {

@@ -1,11 +1,11 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
+import com.github.sulir.vcdemo.mapper.api.Synonym;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Command {
     private Object object;
@@ -31,7 +31,23 @@ public class Command {
     public double calculateScore() {
         Set<String> methodSet = new HashSet<>(methodWords);
         Set<String> sentenceSet = new HashSet<>(sentenceWords);
-        return SetUtils.jaccardIndex(methodSet, sentenceSet);
+
+        double maxScore = SetUtils.jaccardIndex(methodSet, sentenceSet);
+
+        for (Synonym synonym: method.getAnnotationsByType(Synonym.class)) {
+            Set<String> methodWithSynonyms = methodSet.stream().map((word) -> {
+                if (word.equals(synonym.is()))
+                    return synonym.of();
+                else
+                    return word;
+            }).collect(Collectors.toSet());
+
+            double score = SetUtils.jaccardIndex(methodWithSynonyms, sentenceSet);
+            if (score > maxScore)
+                maxScore = score;
+        }
+
+        return maxScore;
     }
 
     public void execute() {

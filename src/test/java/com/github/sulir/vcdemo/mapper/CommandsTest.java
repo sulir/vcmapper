@@ -1,10 +1,9 @@
 package com.github.sulir.vcdemo.mapper;
 
+import com.github.sulir.vcdemo.mapper.api.CommandExecutor;
 import com.github.sulir.vcdemo.mapper.exceptions.AmbiguityException;
 import com.github.sulir.vcdemo.mapper.exceptions.NoMatchException;
-import com.github.sulir.vcdemo.mapper.api.CommandExecutor;
 import com.github.sulir.vcdemo.sample.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -52,7 +51,7 @@ public class CommandsTest {
 
     @Test
     public void extraWord() {
-        execute("please turn the light on");
+        execute("could you please turn the light on");
         verify(lightService).turnOn();
     }
 
@@ -87,7 +86,6 @@ public class CommandsTest {
     }
 
     @Test
-    @Ignore
     public void methodLocalSynonym() {
         execute("switch off light");
         verify(lightService).turnOff();
@@ -96,10 +94,8 @@ public class CommandsTest {
     private void execute(String command) {
         try {
             executor.execute(command);
-        } catch (NoMatchException e) {
-            fail("no matching command found");
-        } catch (AmbiguityException e) {
-            fail("ambiguity: " + e.getMatchingMethods());
+        } catch (NoMatchException | AmbiguityException e) {
+            fail(e.getMessage());
         }
     }
 }
