@@ -1,3 +1,5 @@
-# Voice Control Demo
+# Designing Voice-Controllable APIs
 
-This is a simple demo for our paper (in progress). It represents the mapping of natural language sentences to API calls utilizing class names, method and parameter names, and various annotations.
+This is a prototype implementation of a framework mapping natural language sentences to API calls utilizing class names, method names, and various annotations. It also contains simple tests showcasing the framework's possibilities.
+
+More details are presented in our paper (under review).
