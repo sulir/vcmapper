@@ -80,6 +80,12 @@ public class CommandsTest {
     }
 
     @Test
+    public void enumeratedStringValues() {
+        execute("turn on the topmost monitor");
+        verify(monitorService).turnOn("topmost");
+    }
+
+    @Test
     public void mappingClass() {
         execute("set light 2 to yellow color");
         verify(lightService).setColor(2, new Color(255, 255, 0));

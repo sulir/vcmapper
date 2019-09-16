@@ -1,10 +1,7 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
 import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterException;
-import com.github.sulir.vcdemo.mapper.parameters.EnumConverter;
-import com.github.sulir.vcdemo.mapper.parameters.MappedClassConverter;
-import com.github.sulir.vcdemo.mapper.parameters.NumberConverter;
-import com.github.sulir.vcdemo.mapper.parameters.ParameterConverter;
+import com.github.sulir.vcdemo.mapper.parameters.*;
 
 import java.lang.reflect.Parameter;
 
@@ -12,6 +9,7 @@ public class MethodParameter {
     private static final ParameterConverter[] converters = {
             new NumberConverter(),
             new EnumConverter(),
+            new StringConverter(),
             new MappedClassConverter()
     };
 

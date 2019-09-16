@@ -1,14 +1,12 @@
 package com.github.sulir.vcdemo.sample;
 
-import com.github.sulir.vcdemo.mapper.api.OptionalWord;
+import com.github.sulir.vcdemo.mapper.api.ValidValues;
 import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
 
 @VoiceControllable
 public class MonitorService {
-    // 14. add optional word - "turn on" means "turn on all"
-    // (not sure if it is applicable for the current algorithm)
-    @OptionalWord("all")
-    public void turnOn() {
+    // 14. string parameter with all possible values enumerated
+    public void turnOn(@ValidValues(PositionValues.class) String position) {
 
     }
 
