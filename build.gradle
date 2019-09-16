@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'com.github.sulir.vcdemo'
+group 'com.github.sulir.vcmapper'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.9
@@ -16,6 +16,4 @@ dependencies {
     compile 'org.apache.opennlp:opennlp-tools:1.9.1'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile 'org.mockito:mockito-core:2.+'
-    compileOnly 'org.projectlombok:lombok:1.18.6'
-    annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }
