@@ -1,10 +1,13 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
+import com.github.sulir.vcdemo.mapper.api.VoiceCommand;
 import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ControlledMethod {
     private Object object;
@@ -22,7 +25,7 @@ public class ControlledMethod {
         words.addAll(methodWords);
 
         for (Parameter parameter : method.getParameters()) {
-            // we need to run javac with the "-parameters" argument to preserve parameter names
+            // we would need to run javac with "-parameters" if we wanted to preserve parameter names
             parameters.add(new MethodParameter(parameter));
         }
 
@@ -30,6 +33,26 @@ public class ControlledMethod {
         String domainClassName = className.split("\\$")[0].split("Service$")[0];
         List<String> classWords = Lexer.getInstance().tokenize(domainClassName);
         words.addAll(classWords);
+    }
+
+    public Command tryRegex(String sentence) {
+        VoiceCommand annotation = method.getAnnotation(VoiceCommand.class);
+
+        if (annotation != null) {
+            String regex = annotation.value();
+            Matcher matcher = Pattern.compile(regex).matcher(sentence);
+
+            if (matcher.matches()) {
+                Command command = new Command(object, method, Collections.emptyList());
+
+                for (int i = 1; i <= matcher.groupCount(); i++)
+                    command.addParameterValue(matcher.group(i));
+
+                return command;
+            }
+        }
+
+        return null;
     }
 
     public Command matchParameters(List<String> sentenceWords) {

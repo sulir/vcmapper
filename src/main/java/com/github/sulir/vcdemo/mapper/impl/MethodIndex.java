@@ -1,5 +1,6 @@
 package com.github.sulir.vcdemo.mapper.impl;
 
+import com.github.sulir.vcdemo.mapper.api.VoiceCommand;
 import com.github.sulir.vcdemo.mapper.api.VoiceControllable;
 import com.github.sulir.vcdemo.mapper.exceptions.UnsupportedParameterException;
 
@@ -23,7 +24,10 @@ public class MethodIndex {
     public void addMethod(Method method, Object object) {
         try {
             ControlledMethod controlledMethod = new ControlledMethod(object, method);
-            controlledMethod.buildIndex();
+
+            if (!method.isAnnotationPresent(VoiceCommand.class))
+                controlledMethod.buildIndex();
+
             methods.add(controlledMethod);
         } catch (UnsupportedParameterException e) {
             System.err.println(e.getMessage());

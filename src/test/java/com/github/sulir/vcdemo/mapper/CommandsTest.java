@@ -91,6 +91,12 @@ public class CommandsTest {
         verify(lightService).turnOff();
     }
 
+    @Test
+    public void fallbackRegex() {
+        execute("say something nice");
+        verify(speechService).speak("something nice");
+    }
+
     private void execute(String command) {
         try {
             executor.execute(command);

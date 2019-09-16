@@ -29,7 +29,15 @@ public class CommandExecutor {
         List<Command> bestMatches = new ArrayList<>();
 
         for (ControlledMethod method : index.getMethods()) {
-            Command command = method.matchParameters(words);
+            Command command = method.tryRegex(sentence);
+
+            if (command != null) {
+                bestMatches.clear();
+                bestMatches.add(command);
+                break;
+            }
+
+            command = method.matchParameters(words);
 
             if (command != null) {
                 double score = command.calculateScore();
