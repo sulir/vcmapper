@@ -1,22 +1,25 @@
 package com.github.sulir.vcmapper.api;
 
-import com.github.sulir.vcmapper.exceptions.AmbiguityException;
-import com.github.sulir.vcmapper.exceptions.NoMatchException;
+import com.github.sulir.vcmapper.base.VoiceControlTest;
 import com.github.sulir.vcmapper.sample.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommandExecutorTest {
+public class CommandExecutorTest extends VoiceControlTest {
     private LightService lightService = mock(LightService.class);
     private MonitorService monitorService = mock(MonitorService.class);
     private SpeechService speechService = mock(SpeechService.class);
-    private CommandExecutor executor = new CommandExecutor(lightService, monitorService, speechService);
+
+    @Before
+    public void setUp() {
+        executor = new CommandExecutor(lightService, monitorService, speechService);
+    }
 
     @Test
     public void simpleMethodCall() {
@@ -106,13 +109,5 @@ public class CommandExecutorTest {
     public void fallbackRegex() {
         execute("say something nice");
         verify(speechService).speak("something nice");
-    }
-
-    private void execute(String command) {
-        try {
-            executor.execute(command);
-        } catch (NoMatchException | AmbiguityException e) {
-            fail(e.getMessage());
-        }
     }
 }
