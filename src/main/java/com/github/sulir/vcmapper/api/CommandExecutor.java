@@ -47,7 +47,7 @@ public class CommandExecutor {
                     bestMatches.clear();
                 }
 
-                if (score > SCORE_THRESHOLD && score >= bestScore) {
+                if (score >= SCORE_THRESHOLD && score >= bestScore) {
                     bestMatches.add(command);
                 }
             }

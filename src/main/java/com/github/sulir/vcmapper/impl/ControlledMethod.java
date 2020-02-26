@@ -43,7 +43,7 @@ public class ControlledMethod {
 
         if (annotation != null) {
             String regex = annotation.value();
-            Matcher matcher = Pattern.compile(regex).matcher(sentence);
+            Matcher matcher = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(sentence);
 
             if (matcher.matches()) {
                 Command command = new Command(object, method, Collections.emptyList());

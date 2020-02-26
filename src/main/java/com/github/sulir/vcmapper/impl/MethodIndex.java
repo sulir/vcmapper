@@ -13,7 +13,7 @@ public class MethodIndex {
     private List<ControlledMethod> methods = new ArrayList<>();
 
     public void addObject(Object object) {
-        Class clazz = object.getClass();
+        Class<?> clazz = object.getClass();
 
         for (java.lang.reflect.Method method : clazz.getDeclaredMethods()) {
             if (shouldBeIndexed(method))
@@ -25,8 +25,10 @@ public class MethodIndex {
         try {
             ControlledMethod controlledMethod = new ControlledMethod(object, method);
 
-            if (!method.isAnnotationPresent(VoiceCommand.class))
-                controlledMethod.buildIndex();
+            if (method.getDeclaringClass().isAnnotationPresent(VoiceControllable.class)
+                    || method.isAnnotationPresent(VoiceControllable.class)) {
+                controlledMethod.buildIndex(); // if a method does not have only a fallback annotation
+            }
 
             methods.add(controlledMethod);
         } catch (UnsupportedParameterException e) {
@@ -43,7 +45,8 @@ public class MethodIndex {
             return false;
 
         if (!method.getDeclaringClass().isAnnotationPresent(VoiceControllable.class)
-                && !method.isAnnotationPresent(VoiceControllable.class))
+                && !method.isAnnotationPresent(VoiceControllable.class)
+                && !method.isAnnotationPresent(VoiceCommand.class))
             return false;
 
         if (method.getName().contains("Mockito"))
