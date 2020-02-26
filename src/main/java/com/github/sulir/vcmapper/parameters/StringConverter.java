@@ -2,6 +2,7 @@ package com.github.sulir.vcmapper.parameters;
 
 import com.github.sulir.vcmapper.api.ValidValues;
 import com.github.sulir.vcmapper.api.ValueSet;
+import com.github.sulir.vcmapper.impl.Lexer;
 
 import java.lang.reflect.Parameter;
 
@@ -16,11 +17,14 @@ public class StringConverter implements ParameterConverter {
         try {
             ValidValues annotation = parameter.getAnnotation(ValidValues.class);
             ValueSet generator = annotation.value().getDeclaredConstructor().newInstance();
+            Lexer lexer = Lexer.getInstance();
 
-            if (generator.getValues().contains(term))
-                return term;
-            else
-                return null;
+            for (String possibleValue : generator.getValues()) {
+                if (term.equals(lexer.tokenizeAndJoin(possibleValue)))
+                    return possibleValue;
+            }
+
+            return null;
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
             return null;
