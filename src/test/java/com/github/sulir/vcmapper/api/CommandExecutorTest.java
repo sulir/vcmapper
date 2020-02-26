@@ -97,6 +97,12 @@ public class CommandExecutorTest {
     }
 
     @Test
+    public void classLocalSynonym() {
+        execute("run light show");
+        verify(lightService).startShow();
+    }
+
+    @Test
     public void fallbackRegex() {
         execute("say something nice");
         verify(speechService).speak("something nice");

@@ -4,6 +4,7 @@ import com.github.sulir.vcmapper.api.Synonym;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class Command {
 
         double maxScore = SetUtils.jaccardIndex(methodSet, sentenceSet);
 
-        for (Synonym synonym: method.getAnnotationsByType(Synonym.class)) {
+        for (Synonym synonym: findSynonyms()) {
             Set<String> methodWithSynonyms = methodSet.stream().map((word) -> {
                 if (word.equals(synonym.is()))
                     return synonym.of();
@@ -61,5 +62,14 @@ public class Command {
     @Override
     public String toString() {
         return method.toString();
+    }
+
+    private List<Synonym> findSynonyms() {
+        List<Synonym> result =  new ArrayList<>();
+
+        result.addAll(Arrays.asList(method.getAnnotationsByType(Synonym.class)));
+        result.addAll(Arrays.asList(method.getDeclaringClass().getAnnotationsByType(Synonym.class)));
+
+        return result;
     }
 }
