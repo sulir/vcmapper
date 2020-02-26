@@ -5,7 +5,10 @@ import com.github.sulir.vcmapper.exceptions.UnsupportedParameterException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +66,7 @@ public class ControlledMethod {
             Iterator<String> iterator = sentenceWords.iterator();
             boolean matchFound = false;
 
-            while (iterator.hasNext()) {
+            while (iterator.hasNext()) { // multi-word parameters not yet supported
                 Object match = parameter.tryConversion(iterator.next());
 
                 if (match != null) {

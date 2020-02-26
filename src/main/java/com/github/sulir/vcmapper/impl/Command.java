@@ -37,7 +37,9 @@ public class Command {
 
         for (Synonym synonym: findSynonyms()) {
             Set<String> methodWithSynonyms = methodSet.stream().map((word) -> {
-                if (word.equals(synonym.is()))
+                if (word.equals(synonym.of()))
+                    return synonym.is();
+                else if (word.equals(synonym.is()))
                     return synonym.of();
                 else
                     return word;

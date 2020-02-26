@@ -26,6 +26,10 @@ public class Lexer {
         return words.stream().map(stemmer::stem).collect(Collectors.toList());
     }
 
+    public String tokenizeAndJoin(String string) {
+        return String.join(" ", tokenize(string));
+    }
+
     private List<String> split(String string) {
         String[] splitIdentifiers = StringUtils.splitByCharacterTypeCamelCase(string);
         String joinedLower = String.join(" ", splitIdentifiers).toLowerCase();
