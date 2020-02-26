@@ -20,8 +20,11 @@ public class EnumConverter implements ParameterConverter {
                 return constant;
 
             for (Synonym synonym : parameter.getType().getAnnotationsByType(Synonym.class)) {
-                if ((constantName.equals(synonym.of()) && term.equals(synonym.is())) ||
-                        (constantName.equals(synonym.is()) && term.equals(synonym.of())))
+                String synonymOf = Lexer.getInstance().tokenizeAndJoin(synonym.of());
+                String synonymIs = Lexer.getInstance().tokenizeAndJoin(synonym.is());
+
+                if ((constantName.equals(synonymOf) && term.equals(synonymIs)) ||
+                        (constantName.equals(synonymIs) && term.equals(synonymOf)))
                     return constant;
             }
         }

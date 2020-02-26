@@ -34,16 +34,21 @@ public class Command {
         Set<String> sentenceSet = new HashSet<>(sentenceWords);
 
         double maxScore = SetUtils.jaccardIndex(methodSet, sentenceSet);
+        Lexer lexer = Lexer.getInstance();
 
         for (Synonym synonym: findSynonyms()) {
-            Set<String> methodWithSynonyms = methodSet.stream().map((word) -> {
-                if (word.equals(synonym.of()))
-                    return synonym.is();
-                else if (word.equals(synonym.is()))
-                    return synonym.of();
-                else
-                    return word;
-            }).collect(Collectors.toSet());
+            Set<String> methodWithSynonyms = new HashSet<>(methodSet);
+            for (String word : methodWithSynonyms) {
+                if (word.equals(lexer.tokenizeAndJoin(synonym.of()))) {
+                    methodWithSynonyms.remove(word);
+                    methodWithSynonyms.addAll(lexer.tokenize(synonym.is()));
+                    break;
+                } else if (word.equals(lexer.tokenizeAndJoin(synonym.is()))) {
+                    methodWithSynonyms.remove(word);
+                    methodWithSynonyms.addAll(lexer.tokenize(synonym.of()));
+                    break;
+                }
+            }
 
             double score = SetUtils.jaccardIndex(methodWithSynonyms, sentenceSet);
             if (score > maxScore)
@@ -67,7 +72,7 @@ public class Command {
     }
 
     private List<Synonym> findSynonyms() {
-        List<Synonym> result =  new ArrayList<>();
+        List<Synonym> result = new ArrayList<>();
 
         result.addAll(Arrays.asList(method.getAnnotationsByType(Synonym.class)));
         result.addAll(Arrays.asList(method.getDeclaringClass().getAnnotationsByType(Synonym.class)));
