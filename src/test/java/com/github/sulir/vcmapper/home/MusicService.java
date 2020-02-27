@@ -7,4 +7,8 @@ public class MusicService {
     public void start() {
 
     }
+
+    public void stop() {
+
+    }
 }
