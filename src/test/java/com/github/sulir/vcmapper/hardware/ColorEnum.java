@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.sample;
+package com.github.sulir.vcmapper.hardware;
 
 public enum ColorEnum {
     RED,

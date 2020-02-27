@@ -1,7 +1,7 @@
-package com.github.sulir.vcmapper.api;
+package com.github.sulir.vcmapper.hardware;
 
+import com.github.sulir.vcmapper.api.CommandExecutor;
 import com.github.sulir.vcmapper.base.VoiceControlTest;
-import com.github.sulir.vcmapper.sample.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,14 +11,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommandExecutorTest extends VoiceControlTest {
+public class HardwareDevicesTest extends VoiceControlTest {
     private LightService lightService = mock(LightService.class);
     private MonitorService monitorService = mock(MonitorService.class);
     private SpeechService speechService = mock(SpeechService.class);
+    private Operators operators = new Operators();
 
     @Before
     public void setUp() {
-        executor = new CommandExecutor(lightService, monitorService, speechService);
+        executor = new CommandExecutor(lightService, monitorService, speechService, operators);
     }
 
     @Test
@@ -109,5 +110,12 @@ public class CommandExecutorTest extends VoiceControlTest {
     public void fallbackRegex() {
         execute("say something nice");
         verify(speechService).speak("something nice");
+    }
+
+    @Test
+    public void simpleComposition() {
+        execute("turn on light and turn on the topmost monitor");
+        verify(lightService).turnOn();
+        verify(monitorService).turnOn("topmost");
     }
 }

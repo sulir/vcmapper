@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.sample;
+package com.github.sulir.vcmapper.hardware;
 
 import com.github.sulir.vcmapper.api.VoiceCommand;
 
