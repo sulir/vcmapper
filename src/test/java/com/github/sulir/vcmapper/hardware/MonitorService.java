@@ -1,5 +1,6 @@
 package com.github.sulir.vcmapper.hardware;
 
+import com.github.sulir.vcdemo.mapper.annotations.OnException;
 import com.github.sulir.vcmapper.api.ValidValues;
 import com.github.sulir.vcmapper.api.VoiceControllable;
 
@@ -23,6 +24,12 @@ public class MonitorService {
 
     // 17. instead of integers, we can use enums: "turn on the left and right monitor"
     public void turnOn(Position[] positions) {
+
+    }
+
+    // 18. exception message (voice output)
+    @OnException(of = IndexOutOfBoundsException.class, say = "Monitor {number} does not exist.")
+    public void turnOff(int number) {
 
     }
 }
