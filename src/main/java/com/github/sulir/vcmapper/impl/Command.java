@@ -51,8 +51,10 @@ public class Command {
             }
 
             double score = SetUtils.jaccardIndex(methodWithSynonyms, sentenceSet);
-            if (score > maxScore)
+            if (score > maxScore) {
                 maxScore = score;
+                methodSet = methodWithSynonyms;
+            }
         }
 
         return maxScore;
