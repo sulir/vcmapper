@@ -48,7 +48,7 @@ public class ControlledMethod {
             if (matcher.matches()) {
                 Command command = new Command(object, method, Collections.emptyList());
 
-                for (int i = 1; i <= matcher.groupCount(); i++)
+                for (int i = 1; i <= method.getParameterCount(); i++)
                     command.addParameterValue(matcher.group(i));
 
                 return command;
