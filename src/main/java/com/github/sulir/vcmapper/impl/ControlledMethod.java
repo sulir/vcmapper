@@ -1,6 +1,9 @@
 package com.github.sulir.vcmapper.impl;
 
+import com.github.sulir.vcmapper.api.CommandExecutor;
 import com.github.sulir.vcmapper.api.VoiceCommand;
+import com.github.sulir.vcmapper.exceptions.AmbiguityException;
+import com.github.sulir.vcmapper.exceptions.NoMatchException;
 import com.github.sulir.vcmapper.exceptions.UnsupportedParameterException;
 
 import java.lang.reflect.Method;
@@ -38,7 +41,7 @@ public class ControlledMethod {
         words.addAll(classWords);
     }
 
-    public Command tryRegex(String sentence) {
+    public Command tryRegex(String sentence, CommandExecutor executor) {
         VoiceCommand annotation = method.getAnnotation(VoiceCommand.class);
 
         if (annotation != null) {
@@ -48,8 +51,21 @@ public class ControlledMethod {
             if (matcher.matches()) {
                 Command command = new Command(object, method, Collections.emptyList());
 
-                for (int i = 1; i <= method.getParameterCount(); i++)
-                    command.addParameterValue(matcher.group(i));
+                for (int i = 1; i <= method.getParameterCount(); i++) {
+                    String group = matcher.group(i);
+
+                    if (method.getParameters()[i - 1].getType() == Runnable.class) {
+                        command.addParameterValue((Runnable) () -> {
+                            try {
+                                executor.execute(group);
+                            } catch (NoMatchException | AmbiguityException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } else {
+                        command.addParameterValue(group);
+                    }
+                }
 
                 return command;
             }
