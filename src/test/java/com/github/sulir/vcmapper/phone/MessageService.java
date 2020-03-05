@@ -6,4 +6,8 @@ public class MessageService {
     public void send(@IfAbsent("To whom?") String contact, String text) {
 
     }
+
+    public void send(Message message) {
+
+    }
 }
