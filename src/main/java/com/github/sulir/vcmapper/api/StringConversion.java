@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface StringMapping {
-    Class<? extends StringMapper<?>> value();
+public @interface StringConversion {
+    Class<? extends StringConverter<?>> value();
 }
