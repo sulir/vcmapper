@@ -1,6 +1,6 @@
 package com.github.sulir.vcmapper.hardware;
 
-import com.github.sulir.vcdemo.mapper.annotations.OnException;
+import com.github.sulir.vcmapper.api.OnException;
 import com.github.sulir.vcmapper.api.ValidValues;
 import com.github.sulir.vcmapper.api.VoiceControllable;
 

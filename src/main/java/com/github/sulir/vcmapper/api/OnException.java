@@ -1,4 +1,4 @@
-package com.github.sulir.vcdemo.mapper.annotations;
+package com.github.sulir.vcmapper.api;
 
 public @interface OnException {
     Class<?> of();
