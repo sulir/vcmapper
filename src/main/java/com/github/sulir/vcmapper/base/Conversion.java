@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.api;
+package com.github.sulir.vcmapper.base;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-public @interface IfAbsent {
-    String value();
+public @interface Conversion {
+    Class<? extends Converter<?>> value();
 }

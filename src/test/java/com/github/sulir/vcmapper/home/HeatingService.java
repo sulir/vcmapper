@@ -1,7 +1,7 @@
 package com.github.sulir.vcmapper.home;
 
-import com.github.sulir.vcmapper.api.Synonym;
-import com.github.sulir.vcmapper.api.VoiceControllable;
+import com.github.sulir.vcmapper.base.Synonym;
+import com.github.sulir.vcmapper.base.VoiceControllable;
 
 @VoiceControllable
 @Synonym(of="decrease", is="turn down")

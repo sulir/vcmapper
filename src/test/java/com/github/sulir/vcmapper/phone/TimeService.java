@@ -1,6 +1,6 @@
 package com.github.sulir.vcmapper.phone;
 
-import com.github.sulir.vcmapper.api.VoiceResponse;
+import com.github.sulir.vcmapper.dialog.ResponseConversion;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +14,7 @@ public class TimeService {
         return new Time();
     }
 
-    @VoiceResponse(TimeResponse.class)
+    @ResponseConversion(TimeResponse.class)
     public Time getTime() {
         return new Time();
     }

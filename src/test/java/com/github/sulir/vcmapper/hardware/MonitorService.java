@@ -1,13 +1,13 @@
 package com.github.sulir.vcmapper.hardware;
 
-import com.github.sulir.vcmapper.api.OnException;
-import com.github.sulir.vcmapper.api.ValidValues;
-import com.github.sulir.vcmapper.api.VoiceControllable;
+import com.github.sulir.vcmapper.dialog.OnException;
+import com.github.sulir.vcmapper.base.StringEnumeration;
+import com.github.sulir.vcmapper.base.VoiceControllable;
 
 @VoiceControllable
 public class MonitorService {
     // 14. string parameter with all possible values enumerated
-    public void turnOn(@ValidValues(PositionValues.class) String position) {
+    public void turnOn(@StringEnumeration(PositionValues.class) String position) {
 
     }
 

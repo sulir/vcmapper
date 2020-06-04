@@ -1,6 +1,6 @@
 package com.github.sulir.vcmapper.parameters;
 
-import com.github.sulir.vcmapper.api.Synonym;
+import com.github.sulir.vcmapper.base.Synonym;
 import com.github.sulir.vcmapper.impl.Lexer;
 
 import java.lang.reflect.Parameter;

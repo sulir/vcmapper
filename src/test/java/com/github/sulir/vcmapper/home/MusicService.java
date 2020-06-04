@@ -1,6 +1,6 @@
 package com.github.sulir.vcmapper.home;
 
-import com.github.sulir.vcmapper.api.VoiceControllable;
+import com.github.sulir.vcmapper.base.VoiceControllable;
 
 @VoiceControllable
 public class MusicService {

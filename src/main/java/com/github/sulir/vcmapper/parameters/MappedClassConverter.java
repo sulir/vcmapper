@@ -1,21 +1,21 @@
 package com.github.sulir.vcmapper.parameters;
 
-import com.github.sulir.vcmapper.api.StringMapper;
-import com.github.sulir.vcmapper.api.StringMapping;
+import com.github.sulir.vcmapper.base.Mapper;
+import com.github.sulir.vcmapper.base.Mapping;
 
 import java.lang.reflect.Parameter;
 
 public class MappedClassConverter implements ParameterConverter {
     @Override
     public boolean isForParameter(Parameter parameter) {
-        return parameter.isAnnotationPresent(StringMapping.class);
+        return parameter.isAnnotationPresent(Mapping.class);
     }
 
     @Override
     public Object tryConversion(String term, Parameter parameter) {
         try {
-            StringMapping mapping = parameter.getAnnotation(StringMapping.class);
-            StringMapper mapper = mapping.value().getDeclaredConstructor().newInstance();
+            Mapping mapping = parameter.getAnnotation(Mapping.class);
+            Mapper<?> mapper = mapping.value().getDeclaredConstructor().newInstance();
             return mapper.getMap().get(term);
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();

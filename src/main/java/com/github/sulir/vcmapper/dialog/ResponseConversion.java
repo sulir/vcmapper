@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.api;
+package com.github.sulir.vcmapper.dialog;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface VoiceResponse {
-    Class<? extends ResponseMapper<?>> value();
+public @interface ResponseConversion {
+    Class<? extends ResponseConverter<?>> value();
 }

@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.api;
+package com.github.sulir.vcmapper.base;
 
 import com.github.sulir.vcmapper.exceptions.AmbiguityException;
 import com.github.sulir.vcmapper.exceptions.NoMatchException;

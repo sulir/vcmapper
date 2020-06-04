@@ -1,7 +1,7 @@
 package com.github.sulir.vcmapper.impl;
 
-import com.github.sulir.vcmapper.api.CommandExecutor;
-import com.github.sulir.vcmapper.api.VoiceCommand;
+import com.github.sulir.vcmapper.base.CommandExecutor;
+import com.github.sulir.vcmapper.base.VoiceCommand;
 import com.github.sulir.vcmapper.exceptions.AmbiguityException;
 import com.github.sulir.vcmapper.exceptions.NoMatchException;
 import com.github.sulir.vcmapper.exceptions.UnsupportedParameterException;

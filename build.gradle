@@ -5,7 +5,9 @@ plugins {
 group 'com.github.sulir.vcmapper'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.9
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_9
+}
 
 repositories {
     mavenCentral()

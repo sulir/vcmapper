@@ -1,8 +1,8 @@
 package com.github.sulir.vcmapper.hardware;
 
-import com.github.sulir.vcmapper.api.Synonym;
-import com.github.sulir.vcmapper.api.VoiceControllable;
-import com.github.sulir.vcmapper.api.StringMapping;
+import com.github.sulir.vcmapper.base.Synonym;
+import com.github.sulir.vcmapper.base.VoiceControllable;
+import com.github.sulir.vcmapper.base.Mapping;
 
 @VoiceControllable
 @Synonym(of = "start", is = "run")
@@ -42,7 +42,7 @@ public class LightService {
     // 9. custom mapping class: "set light 2 to green color"
     public void setColor(
             int number,
-            @StringMapping(ColorMapper.class)
+            @Mapping(ColorMapper.class)
             Color color) {
     }
 

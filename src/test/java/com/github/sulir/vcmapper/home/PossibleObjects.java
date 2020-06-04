@@ -1,12 +1,12 @@
 package com.github.sulir.vcmapper.home;
 
-import com.github.sulir.vcmapper.api.ValueSet;
+import com.github.sulir.vcmapper.base.StringEnumerator;
 
 import java.util.Set;
 
-public class PossibleObjects implements ValueSet {
+public class PossibleObjects implements StringEnumerator {
     @Override
-    public Set<String> getValues() {
+    public Set<String> getValidValues() {
         return Set.of("newspaper", "juice", "shoes", "socks");
     }
 }

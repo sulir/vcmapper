@@ -1,10 +1,10 @@
 package com.github.sulir.vcmapper.hardware;
 
-import com.github.sulir.vcmapper.api.StringMapper;
+import com.github.sulir.vcmapper.base.Mapper;
 
 import java.util.Map;
 
-public class ColorMapper implements StringMapper<Color> {
+public class ColorMapper implements Mapper<Color> {
 
     @Override
     public Map<String, Color> getMap() {

@@ -1,7 +1,5 @@
 package com.github.sulir.vcmapper.base;
 
-import com.github.sulir.vcmapper.api.VoiceCommand;
-
 import java.util.function.BooleanSupplier;
 
 public class Operators {

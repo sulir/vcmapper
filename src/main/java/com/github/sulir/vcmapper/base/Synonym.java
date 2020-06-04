@@ -1,4 +1,4 @@
-package com.github.sulir.vcmapper.api;
+package com.github.sulir.vcmapper.base;
 
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;

@@ -1,7 +1,7 @@
 package com.github.sulir.vcmapper.impl;
 
-import com.github.sulir.vcmapper.api.VoiceCommand;
-import com.github.sulir.vcmapper.api.VoiceControllable;
+import com.github.sulir.vcmapper.base.VoiceCommand;
+import com.github.sulir.vcmapper.base.VoiceControllable;
 import com.github.sulir.vcmapper.exceptions.UnsupportedParameterException;
 
 import java.lang.reflect.Method;

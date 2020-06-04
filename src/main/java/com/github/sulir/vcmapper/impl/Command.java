@@ -1,12 +1,10 @@
 package com.github.sulir.vcmapper.impl;
 
-import com.github.sulir.vcmapper.api.Synonym;
+import com.github.sulir.vcmapper.base.Synonym;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Command {
     private Object object;

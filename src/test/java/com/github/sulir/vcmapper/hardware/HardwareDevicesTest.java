@@ -1,6 +1,6 @@
 package com.github.sulir.vcmapper.hardware;
 
-import com.github.sulir.vcmapper.api.CommandExecutor;
+import com.github.sulir.vcmapper.base.CommandExecutor;
 import com.github.sulir.vcmapper.base.Operators;
 import com.github.sulir.vcmapper.base.VoiceControlTest;
 import org.junit.Before;
