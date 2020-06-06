@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MethodIndex {
-    private List<ControlledMethod> methods = new ArrayList<>();
+    private final List<ControlledMethod> methods = new ArrayList<>();
 
     public void addObject(Object object) {
         Class<?> clazz = object.getClass();

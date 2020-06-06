@@ -13,8 +13,8 @@ public class MethodParameter {
             new MappedClassConverter()
     };
 
-    private Parameter parameter;
-    private ParameterConverter converter;
+    private final Parameter parameter;
+    private final ParameterConverter converter;
 
     public MethodParameter(Parameter parameter) throws UnsupportedParameterException {
         this.parameter = parameter;

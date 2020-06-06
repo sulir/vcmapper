@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 public class Lexer {
     private static final List<String> stopWords = List.of("a", "an", "the");
-    private static Lexer instance = new Lexer();
+    private static final Lexer instance = new Lexer();
 
-    private PorterStemmer stemmer = new PorterStemmer();
+    private final PorterStemmer stemmer = new PorterStemmer();
 
     private Lexer() {}
 

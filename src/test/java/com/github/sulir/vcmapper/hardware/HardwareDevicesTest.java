@@ -13,10 +13,10 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HardwareDevicesTest extends VoiceControlTest {
-    private LightService lightService = mock(LightService.class);
-    private MonitorService monitorService = mock(MonitorService.class);
-    private SpeechService speechService = mock(SpeechService.class);
-    private Operators operators = new Operators();
+    private final LightService lightService = mock(LightService.class);
+    private final MonitorService monitorService = mock(MonitorService.class);
+    private final SpeechService speechService = mock(SpeechService.class);
+    private final Operators operators = new Operators();
 
     @Before
     public void setUp() {
@@ -72,7 +72,7 @@ public class HardwareDevicesTest extends VoiceControlTest {
     }
 
     @Test
-    public void emumParameter() {
+    public void enumParameter() {
         execute("turn on left light");
         verify(lightService).turnOn(Position.LEFT);
     }

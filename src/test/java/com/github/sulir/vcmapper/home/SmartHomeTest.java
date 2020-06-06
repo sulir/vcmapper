@@ -20,12 +20,12 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class SmartHomeTest extends VoiceControlTest {
-    private LightsService lightsService = mock(LightsService.class);
-    private MusicService musicService = mock(MusicService.class);
-    private ObjectBringerService objectBringerService = mock(ObjectBringerService.class);
-    private HeatingService heatingService = mock(HeatingService.class);
-    private VolumeService volumeService = mock(VolumeService.class);
-    private LanguageService languageService = mock(LanguageService.class);
+    private final LightsService lightsService = mock(LightsService.class);
+    private final MusicService musicService = mock(MusicService.class);
+    private final ObjectBringerService objectBringerService = mock(ObjectBringerService.class);
+    private final HeatingService heatingService = mock(HeatingService.class);
+    private final VolumeService volumeService = mock(VolumeService.class);
+    private final LanguageService languageService = mock(LanguageService.class);
 
     @Before
     public void setUp() {

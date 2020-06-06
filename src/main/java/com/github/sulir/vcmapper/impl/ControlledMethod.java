@@ -16,10 +16,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControlledMethod {
-    private Object object;
-    private Method method;
-    private List<String> words = new ArrayList<>();
-    private List<MethodParameter> parameters = new ArrayList<>();
+    private final Object object;
+    private final Method method;
+    private final List<String> words = new ArrayList<>();
+    private final List<MethodParameter> parameters = new ArrayList<>();
 
     public ControlledMethod(Object object, Method method) {
         this.object = object;
