@@ -9,10 +9,12 @@ import com.github.sulir.vcmapper.impl.MethodIndex;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class CommandExecutor {
     private static final double SCORE_THRESHOLD = 0.2;
-    private MethodIndex index = new MethodIndex();
+    private final MethodIndex index = new MethodIndex();
+    private Consumer<String> voiceOutput;
 
     public CommandExecutor(Object... objects) {
         for (Object object : objects)
@@ -21,6 +23,10 @@ public class CommandExecutor {
 
     public void addObject(Object object) {
         index.addObject(object);
+    }
+
+    public void setVoiceOutput(Consumer<String> voiceOutput) {
+        this.voiceOutput = voiceOutput;
     }
 
     public void execute(String sentence) throws NoMatchException, AmbiguityException {
@@ -32,8 +38,7 @@ public class CommandExecutor {
             Command command = method.tryRegex(sentence, this);
 
             if (command != null) {
-                bestMatches.clear();
-                bestMatches.add(command);
+                bestMatches = List.of(command);
                 break;
             }
 
@@ -52,6 +57,8 @@ public class CommandExecutor {
                 }
             }
         }
+
+        bestMatches.forEach(command -> command.setVoiceOutput(voiceOutput));
 
         if (bestMatches.isEmpty())
             throw new NoMatchException();

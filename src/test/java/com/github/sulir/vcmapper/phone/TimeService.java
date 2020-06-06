@@ -1,21 +1,29 @@
 package com.github.sulir.vcmapper.phone;
 
+import com.github.sulir.vcmapper.base.VoiceControllable;
+import com.github.sulir.vcmapper.dialog.OnException;
 import com.github.sulir.vcmapper.dialog.ResponseConversion;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.net.SocketException;
 
+@SuppressWarnings("UnusedReturnValue")
+@VoiceControllable
 public class TimeService {
     public String whatTimeIsIt() {
-        return "it is " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME);
+        return "It is 12:34.";
     }
 
-    public Time getCurrentTime() {
+    public Time tellMeCurrentTime() {
         return new Time();
     }
 
     @ResponseConversion(TimeResponse.class)
-    public Time getTime() {
+    public Time iWouldLikeToKnowTime() {
         return new Time();
+    }
+
+    @OnException(of = SocketException.class, say = "I don't know, please try later.")
+    public boolean isTimePrecise() throws SocketException {
+        throw new SocketException();
     }
 }

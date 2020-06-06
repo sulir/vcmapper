@@ -1,17 +1,23 @@
 package com.github.sulir.vcmapper.impl;
 
 import com.github.sulir.vcmapper.base.Synonym;
+import com.github.sulir.vcmapper.dialog.OnException;
+import com.github.sulir.vcmapper.dialog.ResponseConversion;
+import com.github.sulir.vcmapper.dialog.ResponseConverter;
+import com.github.sulir.vcmapper.dialog.VoiceResponse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Command {
-    private Object object;
-    private Method method;
-    private List<String> methodWords;
+    private final Object object;
+    private final Method method;
+    private final List<String> methodWords;
     private List<String> sentenceWords;
-    private List<Object> parameterValues = new ArrayList<>();
+    private final List<Object> parameterValues = new ArrayList<>();
+    private Consumer<String> voiceOutput;
 
     public Command(Object object, Method method, List<String> methodWords) {
         this.object = object;
@@ -25,6 +31,10 @@ public class Command {
 
     public void addParameterValue(Object value) {
         parameterValues.add(value);
+    }
+
+    public void setVoiceOutput(Consumer<String> voiceOutput) {
+        this.voiceOutput = voiceOutput;
     }
 
     public double calculateScore() {
@@ -60,8 +70,32 @@ public class Command {
 
     public void execute() {
         try {
-            method.invoke(object, parameterValues.toArray());
-        } catch (IllegalAccessException | InvocationTargetException e) {
+            Object result = method.invoke(object, parameterValues.toArray());
+
+            if (voiceOutput != null && result != null) {
+                if (result instanceof String) {
+                    voiceOutput.accept((String) result);
+                } else if (method.isAnnotationPresent(ResponseConversion.class)) {
+                    @SuppressWarnings("rawtypes") Class<? extends ResponseConverter> converter =
+                            method.getAnnotation(ResponseConversion.class).value();
+                    //noinspection unchecked
+                    voiceOutput.accept(converter.getDeclaredConstructor().newInstance().toResponse(result));
+                } else if (result instanceof VoiceResponse) {
+                    voiceOutput.accept(((VoiceResponse) result).toResponse());
+                } else {
+                    voiceOutput.accept(result.toString());
+                }
+            }
+        } catch (InvocationTargetException e) {
+            if (voiceOutput != null) {
+                OnException onException = method.getAnnotation(OnException.class);
+
+                if (onException != null && onException.of() == e.getCause().getClass())
+                    voiceOutput.accept(onException.say());
+                else
+                    voiceOutput.accept(e.getCause().getMessage());
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException e) {
             e.printStackTrace();
         }
     }
